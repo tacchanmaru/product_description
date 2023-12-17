@@ -11,6 +11,8 @@ api_key = os.getenv("OPENAI_API_KEY")
 items = ['ladies_bag_1', 'ladies_bag_2', 'ladies_bag_3', 'mens_jacket_outer_1', 'mens_jacket_outer_2', 'mens_jacket_outer_3']
 
 
+# openai chat api
+
 def get_response_gpt_4_turbo(system_prompt, user_prompt):
     client = OpenAI()
     response = client.chat.completions.create(
@@ -22,13 +24,6 @@ def get_response_gpt_4_turbo(system_prompt, user_prompt):
         ]
     )
     return response.choices[0].message.content
-
-
-# Function to encode the image
-def encode_image(image_path):
-    with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode('utf-8')
-    
 
 def get_response_gpt_4_with_vision(system_prompt, user_prompt, base64_image, headers):
     payload = {
@@ -62,6 +57,13 @@ def get_response_gpt_4_with_vision(system_prompt, user_prompt, base64_image, hea
 
     return response.json()['choices'][0]['message']['content']
 
+
+
+# Function to encode the image
+def encode_image(image_path):
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode('utf-8')
+    
 
 def gpt_4_turbo():
 
