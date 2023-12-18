@@ -144,13 +144,13 @@ def Zeroshot_CoT():
 def with_vision():
     print("with_vision")
 
-    with open("./with-vsion/system_prompts/young.txt") as f:
+    with open("./with-vision/system_prompts/young.txt") as f:
         system_prompt_young = f.read()
 
-    with open("./with-vsion/system_prompts/elderly.txt") as f:
+    with open("./with-vision/system_prompts/elderly.txt") as f:
         system_prompt_elderly = f.read()
     
-    with open("./with-vsion/length.txt", mode = "w") as length_file:
+    with open("./with-vision/length.txt", mode = "w") as length_file:
 
         for item in items:
             with open("./product_info/" + item + ".txt") as g:
@@ -172,14 +172,14 @@ def with_vision():
             
             length_file.write('young_' + item + ': ' + str(len(res_young)) + '\n')
             print("young_" + item +': ', len(res_young))
-            with open("./with-vsion/description/young_" + item + ".txt", mode="w") as g:
+            with open("./with-vision/description/young_" + item + ".txt", mode="w") as g:
                 g.write(res_young)
 
             res_elderly = get_response_gpt_4_with_vision(system_prompt_elderly, contents_sheet, base64_image, headers)
             
             length_file.write('elderly_' + item + ': ' + str(len(res_elderly)) + '\n')
             print("elderly_" + item +': ', len(res_elderly))
-            with open("./with-vsion/description/elderly_" + item + ".txt", mode="w") as g:
+            with open("./with-vision/description/elderly_" + item + ".txt", mode="w") as g:
                 g.write(res_elderly)
 
 
@@ -195,7 +195,7 @@ def main(folder):
     elif folder == "Zeroshot-CoT":
         Zeroshot_CoT()
 
-    elif folder == "with-vsion":
+    elif folder == "with-vision":
         with_vision()
 
     else:
